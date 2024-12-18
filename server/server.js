@@ -2,7 +2,7 @@ const express = require("express");
 const sqlite3 = require("sqlite3").verbose();
 const server = express();
 
-const db = new sqlite3.Database("./database.db", (err) => {
+const db = new sqlite3.Database("./gik339-labb2.db", (err) => {
   if (err) {
     console.error("Kunde inte ansluta till databasen:", err.message);
   } else {
