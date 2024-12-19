@@ -2,14 +2,6 @@ const express = require("express");
 const sqlite3 = require("sqlite3").verbose();
 const server = express();
 
-const db = new sqlite3.Database("./gik339-labb2.db", (err) => {
-  if (err) {
-    console.error("Kunde inte ansluta till databasen:", err.message);
-  } else {
-    console.log("Ansluten till SQLite-databasen.");
-  }
-});
-
 server
   .use(express.json())
   .use(express.urlencoded({ extended: false }))
@@ -28,6 +20,14 @@ server.listen(PORT, () => {
 
 server.get("/users", (req, res) => {
   const query = "SELECT * FROM users";
+
+  const db = new sqlite3.Database("./gik339-labb2.db", (err) => {
+    if (err) {
+      console.error("Kunde inte ansluta till databasen:", err.message);
+    } else {
+      console.log("Ansluten till SQLite-databasen.");
+    }
+  });
 
   db.all(query, [], (err, rows) => {
     if (err) {
